@@ -1,4 +1,4 @@
-package ru.netology.JavaConfig;
+package ru.netology.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import ru.netology.service.PostService;
 
 
 @Configuration
-public class JavaConfig {
+public class config {
 
     @Bean
     public PostController postController(PostService service) {
