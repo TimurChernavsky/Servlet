@@ -9,18 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MainServlet extends HttpServlet {
-    private PostController controller;
-    private String GET = "GET";
-    private String api = "/api/posts";
-    private String POST = "POST";
-    private String DELETE = "DELETE";
+  private PostController controller;
+  private String GET = "GET";
+  private String api = "/api/posts";
+  private String POST = "POST";
+  private String DELETE = "DELETE";
 
 
-  @Override
+  @Controller
   public void init() {
-    final var repository = new PostRepository();
-    final var service = new PostService(repository);
-    controller = new PostController(service);
+    final var context = new AnnotationConfigApplicationContext(JavaConfig.class);
+    controller = context.getBean(PostController.class);
   }
 
   @Override
@@ -54,4 +53,5 @@ public class MainServlet extends HttpServlet {
     }
   }
 }
+
 
