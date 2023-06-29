@@ -5,10 +5,10 @@ import ru.netology.model.Post;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-// Stub
+
 public class PostRepository {
-    private Map<Long, Post> list;
-    private AtomicLong postID;
+    private final Map<Long, Post> list = new HashMap<>();
+    private final AtomicLong postID = new AtomicLong();
 
     public List<Post> all() {
         return new ArrayList<>(list.values());
@@ -20,13 +20,17 @@ public class PostRepository {
     }
 
     public Post save(Post post) {
-        Random random = new Random();
-        postID.addAndGet(random.nextLong());
+        postID.incrementAndGet();
         list.put(postID.get(), post);
         return post;
     }
 
     public void removeById(long id) {
-        list.remove(id);
+        try {
+            list.remove(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+
