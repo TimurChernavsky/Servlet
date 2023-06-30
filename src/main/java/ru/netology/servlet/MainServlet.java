@@ -14,7 +14,7 @@ public class MainServlet extends HttpServlet {
     private static String METHOD_DELETE = "DELETE";
     private static String METHOD_POST = "POST";
 
-    private static String API_POST_PATH = "/api/posts \\d";
+    private static String API_POST_PATH = "/api/posts";
 
     @Controller
     public void init() {
