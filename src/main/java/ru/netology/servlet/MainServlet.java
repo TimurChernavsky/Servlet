@@ -18,8 +18,9 @@ public class MainServlet extends HttpServlet {
 
     @Controller
     public void init() {
-        final var context = new AnnotationConfigApplicationContext(JavaConfig.class);
-        controller = context.getBean(PostController.class);
+    final var repository = new PostRepository();
+    final var service = new PostService(repository);
+    controller = new PostController(service);
     }
 
     private Long getID(String path) {
