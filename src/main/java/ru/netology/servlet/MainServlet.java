@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MainServlet extends HttpServlet {
-    private static PostController controller;
+    private PostController controller;
     private static String METHOD_GET = "GET";
     private static String METHOD_DELETE = "DELETE";
     private static String METHOD_POST = "POST";
 
-    private static String WAY_api_posts = "/api/posts";
+    private static String API_POST_PATH = "/api/posts \\d";
 
     @Controller
     public void init() {
@@ -36,7 +36,7 @@ public class MainServlet extends HttpServlet {
             if (method.equals(METHOD_GET) && path.equals(WAY_api_posts)) {
                 controller.all(resp);
                 return;
-            } else if (method.equals(METHOD_GET) && path.matches(WAY_api_posts + "\\d")) {
+            } else if (method.equals(METHOD_GET) && path.matches(WAY_api_posts )) {
                 // easy way
                 final var id = getID(path);
                 controller.getById(id, resp);
@@ -44,7 +44,7 @@ public class MainServlet extends HttpServlet {
             } else if (method.equals(METHOD_POST) && path.equals(WAY_api_posts)) {
                 controller.save(req.getReader(), resp);
                 return;
-            } else if (method.equals(METHOD_DELETE) && path.matches(WAY_api_posts + "\\d")) {
+            } else if (method.equals(METHOD_DELETE) && path.matches(WAY_api_posts)) {
                 // easy way
                 final var id = getID(path);
                 controller.removeById(id, resp);
