@@ -5,9 +5,9 @@ import ru.netology.model.Post;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-
+@Repository
 public class PostRepository {
-    private final Map<Long, Post> list = new HashMap<>();
+    private final ConcrurrentMap<Long, Post> list = new ConcrurrentHashMap<>();
     private final AtomicLong postID = new AtomicLong();
 
     public List<Post> all() {
