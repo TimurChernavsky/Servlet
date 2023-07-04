@@ -21,7 +21,7 @@ public class MainServlet extends HttpServlet {
         controller = context.getBean(PostController.class);
     }
 
-    private Long getParseLong(String path) {
+    private Long getIdFromPath(String path) {
         return Long.parseLong(path.substring(path.lastIndexOf("/")));
     }
 
@@ -37,7 +37,7 @@ public class MainServlet extends HttpServlet {
                 return;
             } else if (method.equals(METHOD_GET) && path.matches(API_POST_PATH)) {
                 // easy way
-                final var id = getParseLong(path);
+                final var id = getIdFromPath(path);
                 controller.getById(id, resp);
                 return;
             } else if (method.equals(METHOD_POST) && path.equals(API_POST_PATH)) {
@@ -45,7 +45,7 @@ public class MainServlet extends HttpServlet {
                 return;
             } else if (method.equals(METHOD_DELETE) && path.matches(API_POST_PATH)) {
                 // easy way
-                final var id = getParseLong(path);
+                final var id = getIdFromPath(path);
                 controller.removeById(id, resp);
                 return;
             }
