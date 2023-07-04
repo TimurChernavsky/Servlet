@@ -1,5 +1,5 @@
 package ru.netology.model;
-@Service
+
 public class Post {
   private long id;
   private String content;
