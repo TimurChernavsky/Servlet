@@ -1,5 +1,5 @@
 package ru.netology.servlet;
-
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.netology.controller.PostController;
 import ru.netology.repository.PostRepository;
 import ru.netology.service.PostService;
@@ -10,20 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MainServlet extends HttpServlet {
     private PostController controller;
+    private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
     private static String METHOD_GET = "GET";
     private static String METHOD_DELETE = "DELETE";
     private static String METHOD_POST = "POST";
 
     private static String API_POST_PATH = "/api/posts";
 
-    @Controller
     public void init() {
-    final var repository = new PostRepository();
-    final var service = new PostService(repository);
-    controller = new PostController(service);
+        controller = context.getBean(PostController.class);
     }
 
-    private Long getID(String path) {
+    private Long getParseLong(String path) {
         return Long.parseLong(path.substring(path.lastIndexOf("/")));
     }
 
@@ -39,7 +37,7 @@ public class MainServlet extends HttpServlet {
                 return;
             } else if (method.equals(METHOD_GET) && path.matches(API_POST_PATH)) {
                 // easy way
-                final var id = getID(path);
+                final var id = getParseLong(path);
                 controller.getById(id, resp);
                 return;
             } else if (method.equals(METHOD_POST) && path.equals(API_POST_PATH)) {
@@ -47,7 +45,7 @@ public class MainServlet extends HttpServlet {
                 return;
             } else if (method.equals(METHOD_DELETE) && path.matches(API_POST_PATH)) {
                 // easy way
-                final var id = getID(path);
+                final var id = getParseLong(path);
                 controller.removeById(id, resp);
                 return;
             }
@@ -58,4 +56,3 @@ public class MainServlet extends HttpServlet {
         }
     }
 }
-
