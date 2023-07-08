@@ -1,4 +1,5 @@
 package ru.netology.servlet;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.netology.controller.PostController;
 import ru.netology.repository.PostRepository;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MainServlet extends HttpServlet {
     private PostController controller;
-    private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+    private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("ru.netology");
     private static String METHOD_GET = "GET";
     private static String METHOD_DELETE = "DELETE";
     private static String METHOD_POST = "POST";
